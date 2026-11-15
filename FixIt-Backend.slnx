@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="../FixItShared/FixItShared.csproj" Id="25707c62-b000-4039-a224-af043bf2e30a" />
+  <Project Path="FixIt-Backend.csproj" />
+</Solution>
