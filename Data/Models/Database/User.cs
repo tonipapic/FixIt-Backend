@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace FixIt_Backend.Data.Models;
+namespace FixIt_Backend.Data.Models.Database;
 
 public partial class User
 {

@@ -1,5 +1,6 @@
-﻿
-using FixIt_Backend.Data.Models;
+﻿using FixIt_Backend.Data.Models.Database;
+using FixIt_Backend.Data.Services;
+using FixIt_Backend.Extensions.Exceptions;
 using FixItShared.Data.DTOs.Requests.Auth;
 using FixItShared.Data.DTOs.Responses;
 using Microsoft.AspNetCore.Http;
@@ -13,24 +14,57 @@ namespace FixIt_Backend.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly IDbContextFactory<FixItContext> _dbContextFactory;
-        public AuthController(IDbContextFactory<FixItContext> dbContextFactory)
+        private readonly LocalAuthService _authService;
+        public AuthController(LocalAuthService authService)
         {
-            _dbContextFactory = dbContextFactory;
+            _authService = authService;
         }
 
-        [HttpGet("details/{id}")]
-        public ActionResult<UserResponseDTO> GetUser(int? id)
+
+        [HttpPost("login")]
+        public async Task<ActionResult<UserResponseDTO>> Login(LoginRequestDTO loginRequestDTO)
         {
-            
+            try
+            {
+                var userResponse = await _authService.LoginUserAsync(loginRequestDTO);
+                if (userResponse != null)
+                {
+                    return Ok(userResponse);
+                }
+                else
+                {
+                    return Unauthorized();
+                }
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpPost("register")]
-        public ActionResult<UserResponseDTO> Register(RegisterRequestDTO registerRequest)
+        public async Task<ActionResult<UserResponseDTO>> Register(RegisterRequestDTO registerRequest)
         {
-
-
-            return Ok();
-        } 
+            try
+            {
+                var userResponse = await _authService.RegisterNewUserAsync(registerRequest);
+                if (userResponse != null)
+                {
+                    return Ok(userResponse);
+                }
+                else
+                {
+                    return Unauthorized();
+                }
+            }
+            catch (UserAlreadyExistsException e)
+            {
+                return Conflict(e.Message);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }

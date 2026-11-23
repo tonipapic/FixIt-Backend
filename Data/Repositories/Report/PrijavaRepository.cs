@@ -1,7 +1,8 @@
-﻿using FixIt_Backend.Data.Models.DB;
+﻿using FixIt_Backend.Data.Models;
+using FixIt_Backend.Data.Models.Database;
 using Microsoft.EntityFrameworkCore;
 
-namespace FixIt_Backend.Data.Repositories
+namespace FixIt_Backend.Data.Repositories.Report
 {
     public class PrijavaRepository
     {

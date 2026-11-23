@@ -1,8 +1,8 @@
-﻿using FixIt_Backend.Data.Models.DB;
+﻿using FixIt_Backend.Data.Models.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-namespace FixIt_Backend.Data.Repositories
+namespace FixIt_Backend.Data.Repositories.UserRepo
 {
     public class UserRepository : IUserRepository
     {

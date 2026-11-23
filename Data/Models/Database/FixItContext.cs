@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace FixIt_Backend.Data.Models;
+namespace FixIt_Backend.Data.Models.Database;
 
 public partial class FixItContext : DbContext
 {

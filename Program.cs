@@ -1,5 +1,13 @@
-using FixIt_Backend.Data.Models;
+using FixIt_Backend.Data.Models.Custom;
+using FixIt_Backend.Data.Models.Database;
+using FixIt_Backend.Data.Repositories.Auth;
+using FixIt_Backend.Data.Repositories.Report;
+using FixIt_Backend.Data.Repositories.UserRepo;
+using FixIt_Backend.Data.Services;
+using FixIt_Backend.Data.UnitOfWork;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -57,6 +65,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

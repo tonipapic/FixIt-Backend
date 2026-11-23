@@ -1,5 +1,5 @@
-﻿using FixIt_Backend.Data.Models.CustomModels;
-using FixIt_Backend.Data.Models.DB;
+﻿using FixIt_Backend.Data.Models.Custom;
+using FixIt_Backend.Data.Models.Database;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -26,6 +26,7 @@ namespace FixIt_Backend.Data.Services
 
             var claims = new List<Claim>
             {
+                new Claim(ClaimTypes.Sid,user.Id.ToString()),
                 new Claim(ClaimTypes.Name,user.Name),
                 new Claim(ClaimTypes.Surname,user.Surname),
                 new Claim(ClaimTypes.Role,user.Role.Name.ToString()),
@@ -37,9 +38,8 @@ namespace FixIt_Backend.Data.Services
                 claims: claims,
                 signingCredentials: creds,
                 expires: DateTime.UtcNow.AddMinutes(double.Parse(jwt.ExpiresMinute))
-
                 );
-
+            
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }

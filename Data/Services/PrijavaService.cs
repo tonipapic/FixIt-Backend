@@ -1,5 +1,5 @@
-﻿using FixIt_Backend.Data.Models.DB;
-using FixIt_Backend.Data.Repositories;
+﻿using FixIt_Backend.Data.Models.Database;
+using FixIt_Backend.Data.Repositories.Report;
 using FixItShared.Data.DTOs.Responses.Prijava;
 using Newtonsoft.Json;
 
